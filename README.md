@@ -1,4 +1,5 @@
 # React + Vite
+https://vitejs.dev/guide/static-deploy.html#render - On render deployement
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
