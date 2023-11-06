@@ -43,7 +43,7 @@ const Screen2 = () => {
 
     return (
         <div className="text-white">
-            <div className="py-40 md:py-72 lg:p-56">
+            <div className="py-40 md:py-72 lg:p-56 landscape:p-32">
                 <p className="flex justify-center place-items-center text-7xl md:text-8xl lg:text-9xl timer-font">
                     {formattedTime}
                 </p>

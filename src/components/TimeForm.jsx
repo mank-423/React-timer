@@ -25,7 +25,7 @@ const TimeForm = () => {
     <div>
       <form>
 
-        <div className='flex justify-center items-center pt-32'>
+        <div className='flex justify-center items-center pt-32 landscape:pt-20'>
 
           <input
             type="text"
