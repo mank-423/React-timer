@@ -10,6 +10,7 @@ export const useTime = () => {
 export const TimeProvider = ({children}) => {
     const [hour, setHour] = useState(0);
     const [min, setMin] = useState(0);
+    const [audio, setAudio] = useState(null);
 
     const addHour = (hr) => {
         setHour(hr);
@@ -24,8 +25,16 @@ export const TimeProvider = ({children}) => {
         setMin(0);
     };
 
+    const addAudio = (obj) => {
+        setAudio(obj);
+    }
+
+    const deleteAudio = () => {
+        setAudio();
+    }
+
     return (
-        <TimeContext.Provider value={{hour, min, addHour, addMin, deleteTime}}>
+        <TimeContext.Provider value={{hour, min, audio, addHour, addMin, deleteTime, addAudio, deleteAudio}}>
             {children}
         </TimeContext.Provider>
     )
