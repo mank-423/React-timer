@@ -19,3 +19,7 @@ Currently, two official plugins are available:
 <img width="960" alt="image" src="https://github.com/mank-423/React-timer/assets/96490105/873777c1-a138-4dad-82d9-85a958a9856c">
 - Timer page
 <img width="960" alt="image" src="https://github.com/mank-423/React-timer/assets/96490105/13c42209-31d5-414e-a38b-7cfdd6755a66">
+
+- Changes with background and music selection
+<img width="960" alt="image" src="https://github.com/mank-423/React-timer/assets/96490105/25c3b0a5-a363-4d18-854f-5180526f6a6d">
+
