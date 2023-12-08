@@ -7,9 +7,11 @@ const AudioCard = (props) => {
         <div className='flex text-white p-2 timer-font justify-center items-center'>
 
 
-            <div className='px-2'>
-                <img src={props.imgSrc} alt="Song Image" className='flex justify-center items-center h-10 w-10' />
-            </div>
+            {props.imgSrc && (
+                <div className='px-2'>
+                    <img src={props.imgSrc} alt="Song Image" className='flex justify-center items-center h-10 w-10' />
+                </div>
+            )}
 
             <p className='flex justify-center items-center px-2 w-1/5 lg:text-base text-sm '>
                 {props.creator}

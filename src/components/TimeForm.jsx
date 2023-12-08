@@ -40,7 +40,7 @@ const TimeForm = () => {
     addHour(ipHour);
     addMin(ipMin);
     // console.log("Global state for hour and min ", hour, " ", min);
-    
+
     navigate("/timer"); //Navigate to timer page
   };
 
@@ -52,12 +52,22 @@ const TimeForm = () => {
   //Adding song from the queue
   const addAudioToGlobalState = (song) => {
     //If audio exists then first remove then add
-    if (ipAudio) {
-      showErrMsg("First remove the selected song");
+    if (ipAudio !== null) {
+      //If same song is selected again
+      if (ipAudio.id === song.id) {
+        showErrMsg("Same song selected again.");
+      } else {
+        showErrMsg("First remove the selected song.");
+      }
     }
-    //Otherwise add the audio
-    setIpAudio(song);
-    addAudio(song);
+
+    else {
+      //Otherwise add the audio
+      setIpAudio(song);
+      addAudio(song);
+      // console.log(song);
+    }
+
   };
 
 
@@ -66,6 +76,7 @@ const TimeForm = () => {
     setIpAudio(null);
     deleteAudio();
   }
+
 
   return (
     <div>
@@ -80,7 +91,7 @@ const TimeForm = () => {
             type="text"
             placeholder={ipHour === 0 ? '00' : ''}
             onChange={(e) => setIpHour(e.target.value)}
-            className='h-44 w-44 rounded-3xl text-9xl timer-font text-center'
+            className='lg:h-44 w-44 rounded-3xl text-9xl timer-font text-center'
           />
 
           <div className='text-white text-7xl pb-4 font-bold'>:</div>
@@ -91,30 +102,39 @@ const TimeForm = () => {
             type="text"
             placeholder={ipHour === 0 ? '00' : ''}
             onChange={(e) => setIpMin(e.target.value)}
-            className='h-44 w-44 rounded-3xl text-9xl timer-font text-center'
+            className='lg:h-44 w-44 rounded-3xl text-9xl timer-font text-center'
           />
 
         </div>
 
         <br />
 
-        {/* If audio is selected then show which audio is selected */}
-        <div>
-          {ipAudio &&
-            (
-              <AudioCard
-                imgSrc={ipAudio.imgSrc}
-                creator={ipAudio.creator}
-                duration={ipAudio.duration}
-                removeSong={removeAudioFromGlobalState}
-              />
-            )
-          }
-        </div>
+        <div className='grid grid-rows-2'>
 
-        <div className='flex justify-center items-center'>
+          <div>
+            {ipAudio ?
+              (
+                <AudioCard
+                  imgSrc={ipAudio.imgSrc}
+                  creator={ipAudio.creator}
+                  duration={ipAudio.duration}
+                  removeSong={removeAudioFromGlobalState}
+                />
+              )
+
+              :
+
+              (
+                <h1 className='text-white timer-font flex justify-center items-center h-full'>No song selected...</h1>
+              )
+
+            }
+          </div>
+
           {/* Submit button to start */}
-          <input type="submit" onClick={handleSubmit} className='bg-white rounded-3xl p-5 timer-font' value={'START'} />
+          <div className='flex justify-center'>
+            <input type="submit" onClick={handleSubmit} className='bg-white hover:bg-[#cbcbcb] cursor-pointer rounded-3xl px-7 py-4 timer-font' value={'START'} />
+          </div>
         </div>
       </form>
 
@@ -122,15 +142,17 @@ const TimeForm = () => {
 
 
       <div className='flex flex-col lg:justify-items-start justify-center'>
-        {audioData.map((item) => (
-          <AudioCard
-            key={item.id}
-            imgSrc={item.imgSrc}
-            creator={item.creator}
-            duration={item.duration}
-            onAddSong={() => addAudioToGlobalState(item)}
-          />
-        ))}
+        {audioData
+          .filter(item => item.id !== (ipAudio && ipAudio.id))
+          .map((item) => (
+            <AudioCard
+              key={item.id}
+              imgSrc={item.imgSrc}
+              creator={item.creator}
+              duration={item.duration}
+              onAddSong={() => addAudioToGlobalState(item)}
+            />
+          ))}
       </div>
     </div>
   );
